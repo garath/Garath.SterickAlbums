@@ -1,0 +1,56 @@
+---
+title: The List
+layout: default
+---
+
+<style>
+  .album-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style-type: none;
+    padding: 0;
+  }
+  .album-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .album-item img, .album-item div {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  .album-info {
+    padding: 10px;
+    flex-grow: 1;
+  }
+  .album-info a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  .album-info a:hover {
+    color: #007BFF;
+  }
+</style>
+
+<ul class="album-list">
+{% for album in site.data.albums %}
+  <li class="album-item">
+    {% if album.Thumbnail and album.Thumbnail != "" %}
+      <img src="{{ album.Thumbnail }}" alt="Cover art for {{ album.Title }}" style="width: 100px; height: 100px;">
+    {% else %}
+      <div style="width: 100px; height: 100px; background-color:gray;"></div>
+    {% endif %}
+    <div class="album-info">
+      <a href="https://www.discogs.com/release/{{ album.Id }}" target="_blank">{{ album.Artist }} - {{ album.Title }}</a>
+    </div>
+  </li>
+{% endfor %}
+</ul>
